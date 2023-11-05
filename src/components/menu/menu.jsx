@@ -1,12 +1,9 @@
 import { SubMenu } from "../subMenu/subMenu"
 
 export const Menu = ({categories}) => {
+  const topLevel = categories.filter(item => item.parentId === undefined)
+
   return (
-    <>
-      {
-        categories.filter(item => item.parentId === undefined)
-          .map(item => <SubMenu key={item.id} id={item.id} categories={categories} />)
-      }
-    </>
+    <SubMenu categories={categories} elements={topLevel} />
   )
 }
