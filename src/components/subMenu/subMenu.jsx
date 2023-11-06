@@ -1,6 +1,6 @@
 import { MenuItem } from "../menuItem/menuItem"
 
-export const SubMenu = ({categories, elements}) => {
+export const SubMenu = ({categories, elements, isChecked}) => {
   return (
     <ul>
       {
@@ -10,6 +10,7 @@ export const SubMenu = ({categories, elements}) => {
             name={category.name}
             id={category.id}
             categories={categories}
+            checked={isChecked}
           />
         })
       }
