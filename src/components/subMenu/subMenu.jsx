@@ -1,6 +1,6 @@
 import { MenuItem } from "../menuItem/menuItem"
 
-export const SubMenu = ({categories, elements, isChecked}) => {
+export const SubMenu = ({categories, elements, isChecked, selected, onCheckboxChange}) => {
   return (
     <ul>
       {
@@ -11,6 +11,8 @@ export const SubMenu = ({categories, elements, isChecked}) => {
             id={category.id}
             categories={categories}
             checked={isChecked}
+            selected={selected}
+            onCheckboxChange={onCheckboxChange}
           />
         })
       }

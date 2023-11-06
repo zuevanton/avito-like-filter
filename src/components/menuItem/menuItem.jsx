@@ -2,15 +2,10 @@ import { useEffect, useState } from "react"
 import { SubMenu } from "../subMenu/subMenu"
 import { Checkbox } from "../checkbox/checkbox"
 
-export const MenuItem = ({categories, name, id, checked}) => {
+export const MenuItem = ({categories, name, id, selected, onCheckboxChange}) => {
   const childrens = categories.filter(category => category.parentId === id)
   
   const [isOpen, setIsOpen] = useState(false)
-  const [isChecked, setIsChecked] = useState(checked)
-
-  useEffect(() => {
-    setIsChecked(checked)
-  }, [checked])
 
   const onItemClick = () => {
     setIsOpen(!isOpen)
@@ -21,12 +16,12 @@ export const MenuItem = ({categories, name, id, checked}) => {
       <li>
         {childrens.length !== 0 && isOpen && '↓'}
         {childrens.length !== 0 && !isOpen && '→'}
-        <Checkbox checked={isChecked} onChange={setIsChecked} />
+        <Checkbox checked={selected.includes(id)} onChange={() => onCheckboxChange(id)} />
         <span onClick={onItemClick}>{name}</span>
       </li>
       {
         childrens.length !== 0 && isOpen && 
-        <SubMenu categories={categories} elements={childrens} isChecked={isChecked} /> 
+        <SubMenu categories={categories} elements={childrens} selected={selected} onCheckboxChange={onCheckboxChange} /> 
       }
     </>
   )
