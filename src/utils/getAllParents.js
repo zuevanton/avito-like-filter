@@ -1,24 +1,12 @@
-//  A  
-//  B
-//     C
-//    +D
-//        +E
-//            ✓X
-//            Y
-// 
-//        ✓F
-//    ✓M
-export const getAllParents = (id, categories, selected, result = []) => {
-  const parentId = categories.filter(item => item.id === id)[0].parentId
+export const getAllParents = (id, categories, selected) => {
+  const {parentId} = categories.find(item => item.id === id);
   const isEveryChildSelected = categories
-    .filter(item => item.parentId === id)
+    .filter(item => item.parentId === parentId && item.id !== id)
     .every(item => selected.includes(item.id))
-  // console.log(categories.filter(item => item.parentId === id))
-  // console.log(isEveryChildSelected)
-  //!selected.includes(parentId)
+  
   if(parentId === undefined || !isEveryChildSelected) {
-    return result
+    return []
   }
 
-  return getAllParents(parentId, categories, selected, [...result, parentId])
+  return [parentId, ...getAllParents(parentId, categories, selected)]
 }

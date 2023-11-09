@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { SubMenu } from "../subMenu/subMenu"
 import { Checkbox } from "../checkbox/checkbox"
 
